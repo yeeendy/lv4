@@ -2,64 +2,55 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FormButton } from "../styles/FormButton";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 // import CommonForm from "../components/CommonForm";
 
 function SignUp() {
+  const navigate = useNavigate();
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
 
-  const handleUserIdChange = (e) => {
-    setUserId(e.target.value);
-  };
-  const handleUserPwChange = (e) => {
-    setUserPw(e.target.value);
-  };
-
-  const handleRegister = async () => {
+  const handleSignUp = async () => {
+    if (!userId || !userPw) {
+      alert("아이디와 비밀번호를 모두 입력해주세요.");
+      return;
+    }
     try {
       const response = await axios.post("http://3.38.191.164/register", {
         id: userId,
         password: userPw,
       });
-
-      //존재하는 아이디가 있는 지 확인
-      // if (userId === id) {
-      // }
-
-      console.log(response);
       if (response.status === 201) {
-        console.log("회원가입 성공");
-        setUserId("");
-        setUserPw("");
-      } else if (response.status === 401) {
-        setError(response.data.message);
-      } else {
-        setError("알 수 없는 오류가 발생했습니다.");
+        alert("회원가입 성공입니다!");
+        navigate("/login");
       }
-      // setUserId(response);
     } catch (error) {
-      alert("서버 에러 발생!");
-      setUserId("");
-      setUserPw("");
+      if (error.response.status === 401) {
+        alert(error.response.data.message);
+      }
     }
   };
-
   return (
     <>
       <Title>회원가입</Title>
       <FormContainer onClick={(e) => e.preventDefault()}>
         <label htmlFor="id">아이디</label>
-        <FormInput type="text" id="id" onChange={handleUserIdChange} />
+        <FormInput
+          type="text"
+          id="id"
+          value={userId}
+          onChange={(e) => setUserId(e.target.value)}
+        />
         <label htmlFor="password">비밀번호</label>
         <FormInput
           type="password"
           id="password"
-          onChange={handleUserPwChange}
+          value={userPw}
+          onChange={(e) => setUserPw(e.target.value)}
         />
-        <FormButton onClick={handleRegister}>회원가입</FormButton>
-        <FormButton>로그인하기</FormButton>
-        {error && <div>{error}</div>}
+        <FormButton onClick={handleSignUp}>회원가입</FormButton>
+        <FormButton onClick={() => navigate("/login")}>로그인하기</FormButton>
       </FormContainer>
     </>
   );

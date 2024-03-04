@@ -1,33 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
 import { FormButton } from "../styles/FormButton";
+import { useNavigate } from "react-router-dom";
+
 // import CommonForm from "../components/CommonForm";
-
 function Login() {
-  const [userId, setUserId] = useState("");
-  const [userPw, setUserPw] = useState("");
+  const navigate = useNavigate();
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleUserIdChange = (e) => {
-    setUserId(e.target.value);
-  };
-  const handleUserPwChange = (e) => {
-    setUserPw(e.target.value);
-  };
+  const handleLogin = async () => {
+    if (!id || !password) {
+      alert("ID와 비밀번호를 모두 입력해주세요.");
+      return;
+    }
 
+    try {
+      const response = await axios.post("http://3.38.191.164/login", {
+        id,
+        password,
+      });
+
+      if (response.status === 201) {
+        alert("로그인 성공");
+        console.log(response);
+        navigate("/");
+      }
+    } catch (error) {
+      if (error.response.status === 401) {
+        alert(error.response.data.message);
+      }
+    }
+  };
   return (
     <>
       <Title>로그인 하기</Title>
-      <FormContainer>
-        <label for="id">아이디</label>
-        <FormInput type="text" id="id" onChange={handleUserIdChange} />
-        <label for="password">비밀번호</label>
+      <FormContainer onSubmit={(e) => e.preventDefault()}>
+        <label htmlFor="id">아이디</label>
+        <FormInput
+          type="text"
+          id="id"
+          value={id}
+          onChange={(e) => setId(e.target.value)}
+        />
+        <label htmlFor="password">비밀번호</label>
         <FormInput
           type="password"
           id="password"
-          onChange={handleUserPwChange}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
-        <FormButton>로그인</FormButton>
-        <FormButton>회원가입</FormButton>
+        <FormButton onClick={handleLogin}>로그인</FormButton>
+        <FormButton onClick={() => navigate("/register")}>회원가입</FormButton>
       </FormContainer>
     </>
   );
