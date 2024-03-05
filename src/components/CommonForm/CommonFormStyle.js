@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
-export const Title = styled.span`
+export const Title = styled.h1`
   font-size: 40px;
   font-weight: 500;
   width: 100%;
+  padding-left: 20px;
 `;
 
 export const FormContainer = styled.form`

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import CommonForm from "../components/CommonForm/CommonForm";
+import CommonForm from "../components/commonForm/CommonForm";
 
 function SignUp() {
   const navigate = useNavigate();

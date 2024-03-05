@@ -1,7 +1,6 @@
 import React from "react";
 import { FormContainer, Title, FormInput, FormButton } from "./CommonFormStyle";
 
-
 function CommonForm({
   title,
   firstBtnName,
