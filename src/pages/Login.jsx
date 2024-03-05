@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import axios from "axios";
-import { FormButton } from "../styles/FormButton";
 import { useNavigate } from "react-router-dom";
+import CommonForm from "../components/CommonForm/CommonForm";
 
-// import CommonForm from "../components/CommonForm";
 function Login() {
   const navigate = useNavigate();
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
+  const [userId, setUserId] = useState("");
+  const [userPw, setUserPw] = useState("");
 
   const handleLogin = async () => {
-    if (!id || !password) {
+    if (!userId || !userPw) {
       alert("ID와 비밀번호를 모두 입력해주세요.");
       return;
     }
 
     try {
       const response = await axios.post("http://3.38.191.164/login", {
-        id,
-        password,
+        id: userId,
+        password: userPw,
       });
 
       if (response.status === 201) {
@@ -46,48 +44,18 @@ function Login() {
   }, []);
 
   return (
-    <>
-      <Title>로그인 하기</Title>
-      <FormContainer onSubmit={(e) => e.preventDefault()}>
-        <label htmlFor="id">아이디</label>
-        <FormInput
-          type="text"
-          id="id"
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-        />
-        <label htmlFor="password">비밀번호</label>
-        <FormInput
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <FormButton onClick={handleLogin}>로그인</FormButton>
-        <FormButton onClick={() => navigate("/register")}>회원가입</FormButton>
-      </FormContainer>
-    </>
+    <CommonForm
+      title={"로그인"}
+      firstBtnName={"로그인"}
+      secondBtnName={"회원가입"}
+      userId={userId}
+      setUserId={setUserId}
+      userPw={userPw}
+      setUserPw={setUserPw}
+      handleSubmit={handleLogin}
+      navigateTo={() => navigate("/register")}
+    />
   );
 }
 
 export default Login;
-
-export const Title = styled.span`
-  font-size: 40px;
-  font-weight: 500;
-  width: 100%;
-`;
-
-export const FormContainer = styled.form`
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  gap: 14px;
-`;
-
-export const FormInput = styled.input`
-  all: unset;
-  border: 1px solid lightgray;
-  border-radius: 8px;
-  padding: 10px;
-`;
