@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FormButton } from "../styles/FormButton";
 import axios from "axios";
@@ -9,7 +9,13 @@ function SignUp() {
   const navigate = useNavigate();
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
-  // const [error, setError] = useState("");
+
+  useEffect(() => {
+    const getUser = window.localStorage.getItem("user-token");
+    if (getUser) {
+      navigate("/");
+    }
+  }, []);
 
   const handleSignUp = async () => {
     if (!userId || !userPw) {

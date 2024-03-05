@@ -26,6 +26,10 @@ function Login() {
         alert("로그인 성공");
         console.log(response);
         navigate("/");
+        // local storage 연결
+        // key 이름 상관없음
+        // local storage에 토큰을 저장
+        window.localStorage.setItem("user-token", response.data.token);
       }
     } catch (error) {
       if (error.response.status === 401) {
@@ -33,6 +37,14 @@ function Login() {
       }
     }
   };
+
+  useEffect(() => {
+    const getUser = window.localStorage.getItem("user-token");
+    if (getUser) {
+      navigate("/");
+    }
+  }, []);
+
   return (
     <>
       <Title>로그인 하기</Title>
