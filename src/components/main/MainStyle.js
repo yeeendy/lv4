@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Title } from "../commonForm/CommonFormStyle";
+import { Title } from "../CommonForm/CommonFormStyle";
 
 export const MainTitle = styled(Title)`
   font-size: 32px;

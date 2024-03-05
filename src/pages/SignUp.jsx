@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
+import api from "../axios/api";
 import { useNavigate } from "react-router-dom";
-import CommonForm from "../components/commonForm/CommonForm";
+import CommonForm from "../components/CommonForm/CommonForm";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function SignUp() {
       return;
     }
     try {
-      const response = await axios.post("http://3.38.191.164/register", {
+      const response = await api.post("/register", {
         id: userId,
         password: userPw,
       });
