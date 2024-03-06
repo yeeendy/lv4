@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
+import api from "../axios/api";
 import { useNavigate } from "react-router-dom";
-import CommonForm from "../components/commonForm/CommonForm";
+import CommonForm from "../components/CommonForm/CommonForm";
 
 function Login() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ function Login() {
     }
 
     try {
-      const response = await axios.post("http://3.38.191.164/login", {
+      const response = await api.post("/login", {
         id: userId,
         password: userPw,
       });

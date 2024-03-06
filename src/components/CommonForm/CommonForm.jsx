@@ -1,5 +1,10 @@
 import React from "react";
-import { FormContainer, Title, FormInput, FormButton } from "./CommonFormStyle";
+import {
+  FormContainer,
+  Title,
+  FormInput,
+  FormButton,
+} from "./CommonFormStyle.js";
 
 function CommonForm({
   title,
@@ -15,7 +20,7 @@ function CommonForm({
   return (
     <>
       <Title>{title}</Title>
-      <FormContainer onClick={(e) => e.preventDefault()}>
+      <FormContainer onSubmit={(e) => e.preventDefault()}>
         <label htmlFor="id">아이디</label>
         <FormInput
           type="text"
