@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import api from "../axios/api";
 import { useNavigate } from "react-router-dom";
 import CommonForm from "../components/CommonForm/CommonForm";
+// import { jwtDecode } from "jwt-decode";
 
 function Login() {
   const navigate = useNavigate();
@@ -23,12 +24,8 @@ function Login() {
 
       if (response.status === 201) {
         alert("로그인 성공");
-        console.log(response);
-        navigate("/");
-        // local storage 연결
-        // key 이름 상관없음
-        // local storage에 토큰을 저장
         window.localStorage.setItem("user-token", response.data.token);
+        navigate("/");
       }
     } catch (error) {
       if (error.response.status === 401) {
@@ -38,10 +35,11 @@ function Login() {
   };
 
   useEffect(() => {
-    const getUser = window.localStorage.getItem("user-token");
-    if (getUser) {
-      navigate("/");
-    }
+    // const getUser = window.localStorage.getItem("user-token");
+    // if (getUser) {
+    //   navigate("/");
+    // }
+    window.localStorage.clear();
   }, []);
 
   return (

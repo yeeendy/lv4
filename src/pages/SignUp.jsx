@@ -9,13 +9,6 @@ function SignUp() {
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
 
-  useEffect(() => {
-    const getUser = window.localStorage.getItem("user-token");
-    if (getUser) {
-      navigate("/");
-    }
-  }, []);
-
   const handleSignUp = async () => {
     if (!userId || !userPw) {
       alert("아이디와 비밀번호를 모두 입력해주세요.");
@@ -36,6 +29,15 @@ function SignUp() {
       }
     }
   };
+
+  useEffect(() => {
+    // const getUser = window.localStorage.getItem("user-token");
+    // if (getUser) {
+    //   navigate("/");
+    // }
+    window.localStorage.clear();
+  }, []);
+  
   return (
     <CommonForm
       title={"회원가입"}
