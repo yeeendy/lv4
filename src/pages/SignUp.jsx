@@ -8,7 +8,7 @@ function SignUp() {
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
 
-  const handleSignUp = async () => {
+  const signUp = async () => {
     if (!userId || !userPw) {
       alert("아이디와 비밀번호를 모두 입력해주세요.");
       return;
@@ -32,7 +32,7 @@ function SignUp() {
   useEffect(() => {
     window.localStorage.clear();
   }, []);
-  
+
   return (
     <CommonForm
       title={"회원가입"}
@@ -42,7 +42,7 @@ function SignUp() {
       setUserId={setUserId}
       userPw={userPw}
       setUserPw={setUserPw}
-      handleSubmit={handleSignUp}
+      onSubmit={signUp}
       navigateTo={() => navigate("/login")}
     />
   );

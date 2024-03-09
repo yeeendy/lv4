@@ -8,7 +8,7 @@ function Login() {
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
 
-  const handleLogin = async () => {
+  const login = async () => {
     if (!userId || !userPw) {
       alert("ID와 비밀번호를 모두 입력해주세요.");
       return;
@@ -45,7 +45,7 @@ function Login() {
       setUserId={setUserId}
       userPw={userPw}
       setUserPw={setUserPw}
-      handleSubmit={handleLogin}
+      onSubmit={login}
       navigateTo={() => navigate("/register")}
     />
   );

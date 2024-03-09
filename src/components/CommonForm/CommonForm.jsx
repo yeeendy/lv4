@@ -14,7 +14,7 @@ function CommonForm({
   setUserId,
   userPw,
   setUserPw,
-  handleSubmit,
+  onSubmit,
   navigateTo,
 }) {
   return (
@@ -35,7 +35,7 @@ function CommonForm({
           value={userPw}
           onChange={(e) => setUserPw(e.target.value)}
         />
-        <FormButton onClick={handleSubmit}>{firstBtnName}</FormButton>
+        <FormButton onClick={onSubmit}>{firstBtnName}</FormButton>
         <FormButton onClick={() => navigateTo()}>{secondBtnName}</FormButton>
       </FormContainer>
     </>
