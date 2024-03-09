@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import axios from "axios";
 import api from "../axios/api";
 import { useNavigate } from "react-router-dom";
 import CommonForm from "../components/CommonForm/CommonForm";
@@ -31,10 +30,6 @@ function SignUp() {
   };
 
   useEffect(() => {
-    // const getUser = window.localStorage.getItem("user-token");
-    // if (getUser) {
-    //   navigate("/");
-    // }
     window.localStorage.clear();
   }, []);
   

@@ -21,7 +21,6 @@ function Home() {
             Authorization: `Bearer ${userToken}`,
           },
         });
-        // console.log(response);
         navigate("/");
       } catch (err) {
         if (err.response) {
